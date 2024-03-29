@@ -24,7 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText signupEmail, signupPassword;
     private Button signupButton;
     private ImageButton loginRedirect;
-
+    private EditText editTextName, editTextUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,39 +38,53 @@ public class SignUpActivity extends AppCompatActivity {
         signupButton = findViewById(R.id.signup_button);
         loginRedirect = findViewById(R.id.loginRedirect);
 
+        // Initialize additional EditText fields
+        editTextName = findViewById(R.id.editTextName);
+        editTextUsername = findViewById(R.id.editTextUsername);
+
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String name = editTextName.getText().toString().trim();
+                String username = editTextUsername.getText().toString().trim();
                 String user = signupEmail.getText().toString().trim();
                 String pass = signupPassword.getText().toString().trim();
 
-                if (user.isEmpty()){
+                if (name.isEmpty()) {
+                    editTextName.setError("Name cannot be empty");
+                } else if (username.isEmpty()) {
+                    editTextUsername.setError("Username cannot be empty");
+                } else if (user.isEmpty()) {
                     signupEmail.setError("Email cannot be empty");
-                }
-                if(pass.isEmpty()){
+                } else if (pass.isEmpty()) {
                     signupPassword.setError("Password cannot be empty");
-                } else{
-                    auth.createUserWithEmailAndPassword(user, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(SignUpActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
-                            } else{
-                                Toast.makeText(SignUpActivity.this, "Signup Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                } else {
+                    // Create user with email and password, passing additional fields
+                    auth.createUserWithEmailAndPassword(user, pass)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Signup successful
+                                        // You may want to store additional user data in Firebase Database here
+                                        Toast.makeText(SignUpActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                                    } else {
+                                        // Signup failed
+                                        Toast.makeText(SignUpActivity.this, "Signup Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                 }
             }
         });
 
-       loginRedirect.setOnClickListener(new View.OnClickListener() {
+        loginRedirect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
             }
         });
-
     }
+
 }
