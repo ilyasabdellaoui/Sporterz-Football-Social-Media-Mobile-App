@@ -15,6 +15,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // setContentView(R.layout.activity_login);
+
+        // initialising all views through id defined above
+        //geeksforgeeks = findViewById(R.id.gfg);
+        //geeksforgeeks.setText("GeeksForGeeks(Firebase Authentication)");
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         changeFragment(new HomeFragment());
