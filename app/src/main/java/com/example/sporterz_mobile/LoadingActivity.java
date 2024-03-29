@@ -27,7 +27,7 @@ public class LoadingActivity extends AppCompatActivity {
                 if (auth.getCurrentUser() != null) {
                     startActivity(new Intent(LoadingActivity.this, MainActivity.class));
                 } else {
-                    startActivity(new Intent(LoadingActivity.this, SignUpActivity.class));
+                    startActivity(new Intent(LoadingActivity.this, LoginActivity.class));
                 }
                 finish();
             }

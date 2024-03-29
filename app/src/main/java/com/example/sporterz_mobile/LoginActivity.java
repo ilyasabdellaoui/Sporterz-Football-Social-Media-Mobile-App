@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private EditText loginEmail, loginPassword;
-    private TextView signupRedirectText;
+    private ImageButton signupRedirectText;
     private Button loginButton;
 
     @Override
@@ -33,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
-        signupRedirectText = findViewById(R.id.signUpRedirectText);
+        signupRedirectText = findViewById(R.id.signUpRedirect);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
