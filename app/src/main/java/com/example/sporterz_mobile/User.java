@@ -1,20 +1,30 @@
 package com.example.sporterz_mobile;
 
 public class User {
-    private String name;
+    private String firstname;
+    private String lastname;
     private String username;
+    private String bio;
 
-    public User(String name, String username) {
-        this.name = name;
+    public User(String firstname, String lastname, String username, String bio) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.username = username;
+        this.bio = bio;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getName() {
-        return this.name;
+    public String getFirstname() { return this.firstname; }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getLastname() {
+        return this.lastname;
     }
 
     public void setUsername(String username) {
@@ -25,4 +35,11 @@ public class User {
         return this.username;
     }
 
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getBio() {
+        return this.bio;
+    }
 }

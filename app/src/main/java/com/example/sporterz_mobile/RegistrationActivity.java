@@ -26,6 +26,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     // Declare any other necessary variables.
     private FirebaseAuth auth;
+    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private ActivityRegistrationBinding binding;
 
@@ -36,32 +37,21 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         auth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("Users");
 
         binding.signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = binding.editTextName.getText().toString().trim();
-                String username = binding.editTextUsername.getText().toString().trim();
                 String email = binding.signupEmail.getText().toString().trim();
                 String password = binding.signupPassword.getText().toString().trim();
 
-                String uid = auth.getCurrentUser().getUid();
-                User user = new User(name, username);
-
-                if (name.isEmpty()) {
-                    binding.editTextName.setError("Name cannot be empty");
-                } else if (username.isEmpty()) {
-                    binding.editTextUsername.setError("Username cannot be empty");
-                } else if (email.isEmpty()) {
+                if (email.isEmpty()) {
                     binding.signupEmail.setError("Email cannot be empty");
                 } else if (password.isEmpty()) {
                     binding.signupPassword.setError("Password cannot be empty");
                 } else {
                     // Create user with email and password, passing additional fields
-                    if (uid != null) {
-                        databaseReference.child(uid).setValue(user);
-                    }
                     auth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -69,11 +59,11 @@ public class RegistrationActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Signup successful
                                         // You may want to store additional user data in Firebase Database here
-                                        Toast.makeText(RegistrationActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
+                                        // Toast.makeText(RegistrationActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(RegistrationActivity.this, InformationsActivity.class));
                                     } else {
                                         // Signup failed
-                                        Toast.makeText(RegistrationActivity.this, "Signup Failed" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegistrationActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

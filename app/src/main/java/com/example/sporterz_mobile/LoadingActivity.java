@@ -31,6 +31,6 @@ public class LoadingActivity extends AppCompatActivity {
                 }
                 finish();
             }
-        }, 3000);
+        }, 2000);
     }
 }

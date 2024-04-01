@@ -18,12 +18,11 @@
         app:srcCompat="@mipmap/ic_launcher_foreground" /> -->
 
     <ImageButton
-        android:id="@+id/loginRedirect"
+        android:id="@+id/signupRedirect"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:backgroundTint="@color/white"
         android:background="@drawable/my_button_transparent"
         android:contentDescription="@string/app_name"
         android:padding="8dp"
@@ -31,67 +30,102 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_arrow_24" />
 
+
     <TextView
         android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:text="Create your account"
-        android:textColor="@color/black"
+        android:layout_marginTop="84dp"
+        android:text="Almost done!"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/signup_email"
+        android:id="@+id/infoUsername"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="76dp"
         android:layout_marginEnd="24dp"
-        android:autofillHints="email"
         android:ems="10"
-        android:hint="email"
-        android:textColor="@color/black"
+        android:hint="username"
         android:textColorHint="@color/material_dynamic_tertiary60"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:maxLength="64"
-        app:layout_constraintBottom_toTopOf="@+id/signup_password"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
 
     <EditText
-        android:id="@+id/signup_password"
+        android:id="@+id/infoLastname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="24dp"
-        android:autofillHints="password"
         android:ems="10"
-        android:hint="password"
+        android:hint="lastname"
         android:textColorHint="@color/material_dynamic_tertiary60"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:maxLength="64"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-        app:layout_constraintVertical_bias="0.696" />
+        app:layout_constraintTop_toBottomOf="@+id/infoFirstname" />
+
+    <EditText
+        android:id="@+id/infoFirstname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:hint="firstname"
+        android:textColorHint="@color/material_dynamic_tertiary60"
+        android:inputType="text"
+        android:maxLength="64"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoUsername" />
+
+    <EditText
+        android:id="@+id/infoBio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:hint="bio"
+        android:textColorHint="@color/material_dynamic_tertiary60"
+        android:inputType="text"
+        android:maxLength="64"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoLastname" />
 
     <android.widget.Button
-        android:id="@+id/signup_button"
+        android:id="@+id/infoCreate"
         android:layout_width="256dp"
         android:layout_height="58dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginBottom="56dp"
         android:background="@drawable/my_button_primary"
-        android:text="Next Step"
+        android:text="CREATE"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -99,19 +133,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Already a user? Login"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/signup_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
-        app:layout_constraintVertical_bias="0.779" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
