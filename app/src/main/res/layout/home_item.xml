@@ -3,36 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    app:cardCornerRadius="10dp"
+    android:layout_margin="16dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="10dp"
+    android:layout_height="wrap_content">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_margin="10dp"
         android:layout_marginBottom="20dp">
 
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/postProfile"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/postTime"
+            android:layout_width="wrap_content"
+            android:textSize="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content"
+            android:text="time" />
 
         <TextView
             android:id="@+id/postUsername"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:layout_marginStart="10dp"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/postProfile"
-            android:layout_marginStart="15dp"
-            android:text="TextView" />
+            android:layout_toEndOf="@id/postProfile"
+            android:text="Username" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/postProfile"
+            android:layout_width="30dp"
+            android:src="@drawable/baseline_message_24"
+            android:layout_height="30dp" />
 
         <TextView
             android:id="@+id/postContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/postUsername"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:textSize="15dp"
             android:layout_toEndOf="@id/postProfile"
+            android:layout_below="@id/postProfile"
             android:text="TextView" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
