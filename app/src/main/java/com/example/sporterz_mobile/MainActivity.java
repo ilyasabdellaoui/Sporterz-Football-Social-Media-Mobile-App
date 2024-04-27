@@ -1,8 +1,6 @@
 package com.example.sporterz_mobile;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -12,11 +10,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sporterz_mobile.databinding.ActivityMainBinding;
+import com.example.sporterz_mobile.fragements.ExploreFragment;
+import com.example.sporterz_mobile.fragements.HomeFragment;
+import com.example.sporterz_mobile.fragements.MatchesFragment;
+import com.example.sporterz_mobile.fragements.MessagesFragment;
+import com.example.sporterz_mobile.fragements.NotificationsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {

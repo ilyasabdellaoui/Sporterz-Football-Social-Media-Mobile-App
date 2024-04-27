@@ -1,6 +1,5 @@
-package com.example.sporterz_mobile;
+package com.example.sporterz_mobile.adapters;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sporterz_mobile.models.HomeItem;
+import com.example.sporterz_mobile.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.MyViewHolder> {
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -33,7 +35,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private Context context;
     private List<HomeItem> items;
 
-    public MyAdapter(Context context, ArrayList<HomeItem> items) {
+    public PostsAdapter(Context context, ArrayList<HomeItem> items) {
         this.context = context;
         this.items = items;
     }
@@ -45,7 +47,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PostsAdapter.MyViewHolder holder, int position) {
         holder.postProfile.setImageBitmap(items.get(position).getImageBitmap());
         holder.postUsername.setText(items.get(position).getUsername());
         holder.postContent.setText(items.get(position).getThinking());

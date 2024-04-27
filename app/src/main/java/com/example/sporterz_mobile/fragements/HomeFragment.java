@@ -1,7 +1,5 @@
-package com.example.sporterz_mobile;
+package com.example.sporterz_mobile.fragements;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -16,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.sporterz_mobile.models.HomeItem;
+import com.example.sporterz_mobile.R;
+import com.example.sporterz_mobile.adapters.PostsAdapter;
 import com.example.sporterz_mobile.databinding.FragmentHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +29,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
     private DatabaseReference databaseReference, dbReference;
     private String uid;
     private RecyclerView recyclerView;
-    private MyAdapter myAdapter;
+    private PostsAdapter postsAdapter;
     private ArrayList<HomeItem> items;
     private HomeItem item;
     private String username;
@@ -63,8 +63,8 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         //recyclerView.setHasFixedSize(true);
         items = new ArrayList<>();
-        myAdapter = new MyAdapter(getContext(), items);
-        recyclerView.setAdapter(myAdapter);
+        postsAdapter = new PostsAdapter(getContext(), items);
+        recyclerView.setAdapter(postsAdapter);
 
         auth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("Posts");
@@ -144,7 +144,7 @@ public class HomeFragment extends Fragment {
                     item = new HomeItem(postImage, username, thinking, postDate);
                     items.add(item);
                 }
-                myAdapter.notifyDataSetChanged();
+                postsAdapter.notifyDataSetChanged();
             }
 
             @Override

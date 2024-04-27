@@ -1,9 +1,8 @@
-package com.example.sporterz_mobile;
+package com.example.sporterz_mobile.fragements;
 
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sporterz_mobile.R;
 import com.example.sporterz_mobile.adapters.UserAdapter;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.sporterz_mobile.models.User;
 import com.google.firebase.database.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,16 +37,16 @@ public class ExploreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_explore, container, false);
+        View view = inflater.inflate(com.example.sporterz_mobile.R.layout.fragment_explore, container, false);
 
-        searchInput = view.findViewById(R.id.seach_username_input);
-        searchButton = view.findViewById(R.id.search_user_btn);
-        userRecyclerView = view.findViewById(R.id.search_user_recycler_view);
+        searchInput = view.findViewById(com.example.sporterz_mobile.R.id.seach_username_input);
+        searchButton = view.findViewById(com.example.sporterz_mobile.R.id.search_user_btn);
+        userRecyclerView = view.findViewById(com.example.sporterz_mobile.R.id.search_user_recycler_view);
         userList = new ArrayList<>();
         userAdapter = new UserAdapter(getActivity(), userList);
         userRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         userRecyclerView.setAdapter(userAdapter);
-        progressBar = view.findViewById(R.id.progress_bar);
+        progressBar = view.findViewById(com.example.sporterz_mobile.R.id.progress_bar);
         noUsersFoundText = view.findViewById(R.id.no_users_found_text);
 
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");

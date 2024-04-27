@@ -1,4 +1,4 @@
-package com.example.sporterz_mobile;
+package com.example.sporterz_mobile.models;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
