@@ -94,8 +94,10 @@ public class ExploreFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         userList.clear();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String userId = snapshot.getKey();
                             User user = snapshot.getValue(User.class);
                             if (user != null) {
+                                user.setUserId(userId);
                                 userList.add(user);
                             }
                         }

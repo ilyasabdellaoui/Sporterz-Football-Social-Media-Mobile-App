@@ -8,6 +8,8 @@ public class User {
     private String username;
     private String bio;
 
+    private String userID;
+
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
@@ -47,5 +49,13 @@ public class User {
 
     public String getBio() {
         return this.bio;
+    }
+
+    public String getUserId() {
+        return this.userID;
+    }
+
+    public void setUserId(String userID) {
+        this.userID = userID;
     }
 }

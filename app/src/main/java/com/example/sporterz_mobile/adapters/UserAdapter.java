@@ -71,7 +71,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         }
 
         private void getProfileImage() throws IOException {
-            final String userId = Objects.requireNonNull(auth.getCurrentUser()).getUid().toString();
+            final String userId = userList.get(getAdapterPosition()).getUserId();
             storageReference = FirebaseStorage.getInstance().getReference().child("images/" + userId);
             File localfile = File.createTempFile("tempImage", "jpeg");
             storageReference.getFile(localfile).addOnSuccessListener(taskSnapshot -> {
