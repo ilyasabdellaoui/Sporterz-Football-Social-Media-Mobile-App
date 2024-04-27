@@ -1,64 +1,119 @@
 package com.example.sporterz_mobile;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ExploreFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.sporterz_mobile.adapters.UserAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExploreFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ExploreFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ExploreFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ExploreFragment newInstance(String param1, String param2) {
-        ExploreFragment fragment = new ExploreFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private EditText searchInput;
+    private ImageButton searchButton;
+    private RecyclerView userRecyclerView;
+    private UserAdapter userAdapter;
+    private List<User> userList;
+    private DatabaseReference usersRef;
+    private ProgressBar progressBar;
+    private TextView noUsersFoundText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_explore, container, false);
+        View view = inflater.inflate(R.layout.fragment_explore, container, false);
+
+        searchInput = view.findViewById(R.id.seach_username_input);
+        searchButton = view.findViewById(R.id.search_user_btn);
+        userRecyclerView = view.findViewById(R.id.search_user_recycler_view);
+        userList = new ArrayList<>();
+        userAdapter = new UserAdapter(getActivity(), userList);
+        userRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        userRecyclerView.setAdapter(userAdapter);
+        progressBar = view.findViewById(R.id.progress_bar);
+        noUsersFoundText = view.findViewById(R.id.no_users_found_text);
+
+        usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchText = searchInput.getText().toString().trim();
+                if (!searchText.isEmpty()) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    searchUsers(searchText);
+                } else {
+                    Toast.makeText(getActivity(), "Please enter a username to search",
+                            Toast.LENGTH_SHORT).show();
+                    userList.clear();
+                    userAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        searchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String searchText = s.toString().trim();
+                if (searchText.isEmpty()) {
+                    userList.clear();
+                    userAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+
+        return view;
+    }
+
+    private void searchUsers(final String searchText) {
+        usersRef.orderByChild("username").startAt(searchText).endAt(searchText + "\uf8ff")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        userList.clear();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            User user = snapshot.getValue(User.class);
+                            if (user != null) {
+                                userList.add(user);
+                            }
+                        }
+                        progressBar.setVisibility(View.GONE);
+                        if (userList.isEmpty()) {
+                            noUsersFoundText.setVisibility(View.VISIBLE);
+                        } else {
+                            noUsersFoundText.setVisibility(View.GONE);
+                        }
+                        userAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getActivity(), "Error: " + databaseError.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
