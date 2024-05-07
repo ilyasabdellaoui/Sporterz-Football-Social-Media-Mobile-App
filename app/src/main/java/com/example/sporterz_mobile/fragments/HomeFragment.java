@@ -1,4 +1,4 @@
-package com.example.sporterz_mobile.fragements;
+package com.example.sporterz_mobile.fragments;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

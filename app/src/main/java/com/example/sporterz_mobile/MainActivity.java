@@ -13,11 +13,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.sporterz_mobile.databinding.ActivityMainBinding;
-import com.example.sporterz_mobile.fragements.ExploreFragment;
-import com.example.sporterz_mobile.fragements.HomeFragment;
-import com.example.sporterz_mobile.fragements.MatchesFragment;
-import com.example.sporterz_mobile.fragements.MessagesFragment;
-import com.example.sporterz_mobile.fragements.NotificationsFragment;
+import com.example.sporterz_mobile.fragments.ExploreFragment;
+import com.example.sporterz_mobile.fragments.HomeFragment;
+import com.example.sporterz_mobile.fragments.MatchesFragment;
+import com.example.sporterz_mobile.fragments.MessagesFragment;
+import com.example.sporterz_mobile.fragments.NotificationsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {

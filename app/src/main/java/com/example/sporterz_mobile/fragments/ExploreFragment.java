@@ -1,4 +1,4 @@
-package com.example.sporterz_mobile.fragements;
+package com.example.sporterz_mobile.fragments;
 
 import android.os.Bundle;
 import android.text.Editable;
