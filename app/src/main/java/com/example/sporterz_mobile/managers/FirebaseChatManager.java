@@ -30,6 +30,7 @@ public class FirebaseChatManager {
 
     private String LastMessage;
     private String timeSt;
+    private String cFullName;
 
     public FirebaseChatManager() {
         mAuth = FirebaseAuth.getInstance();
@@ -53,6 +54,27 @@ public class FirebaseChatManager {
         return latestKey;
     }
 
+    // Get current user fullname
+    public String getCurrentUserFullName() {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String firstname = snapshot.child("firstname").getValue(String.class);
+                    String lastname = snapshot.child("lastname").getValue(String.class);
+                    cFullName = firstname + " " + lastname;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Chat List Adapter", "onCancelled: " + error.getMessage());
+            }
+        });
+        return cFullName;
+    }
+
     // Load chats where the current user is a participant
     public void loadChats(final ChatLoadListener listener) {
         if (mCurrentUser == null) {
@@ -73,6 +95,19 @@ public class FirebaseChatManager {
                     chat.setChatId(chatId);
                     // get the last message in the chat
                     assert chatId != null;
+
+                    String fullName = getCurrentUserFullName();
+                    // chat name is composed of : current user fullname # other user fullname
+                    // I need to get the current user fullname from string Fullname and change chat name to just other user fullname
+                    String[] parts = chat.getName().split("#");
+                    String part1 = parts[0];
+                    String part2 = parts[1];
+                    if (part1.equals(fullName)) {
+                        chat.setName(part2);
+                    } else {
+                        chat.setName(part1);
+                    }
+
                     DataSnapshot message = chatSnapshot.child("messages");
 
                     // get the last message in the in messages
@@ -104,6 +139,9 @@ public class FirebaseChatManager {
                             long timestampSeconds = latestMessage.getTimestamp() / 1000;
                             Date date = new Date(timestampSeconds * 1000);
                             SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy HH:mm", Locale.getDefault());
+                            // split the date and time by new line
+                            sdf.applyPattern("HH:mm\nMMM dd, yyyy");
+
                             String formattedDate = sdf.format(date);
                             chat.setTimestamp(String.valueOf(formattedDate));
 
@@ -111,7 +149,6 @@ public class FirebaseChatManager {
                     } else {
                         chat.setLastMessage(null);
                     }
-                    Log.d(TAG, "JJJJJJJJJJJ onDataChange: " + chat.getChatId() + " " + chat.getParticipants() + " " + chat.getLastMessage() + " " + chat.getTimestamp() + " " + LastMessage);
                     chatList.add(chat);
                 }
                 listener.onChatsLoaded(chatList);

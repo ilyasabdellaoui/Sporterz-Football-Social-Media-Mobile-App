@@ -1,6 +1,7 @@
 package com.example.sporterz_mobile.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sporterz_mobile.R;
 import com.example.sporterz_mobile.models.Chat;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,6 +80,28 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
             chatNameTextView = itemView.findViewById(R.id.chatNameTextView);
             lastMessageTextView = itemView.findViewById(R.id.lastMessageTextView);
             timestampTextView = itemView.findViewById(R.id.timestampTextView);
+        }
+
+        // fetch current authenticated user full name
+
+
+
+        public void fetchChatName(String chatId) {
+            DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference().child("Chats").child(chatId);
+            chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        Chat chat = snapshot.getValue(Chat.class);
+                        chatNameTextView.setText(chat.getName());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("Chat List Adapter", "onCancelled: " + error.getMessage());
+                }
+            });
         }
 
         public void bind(Chat chat) {

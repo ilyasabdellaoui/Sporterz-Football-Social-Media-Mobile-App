@@ -35,19 +35,19 @@ android:layout_marginBottom="10dp">
 
         <TextView
             android:id="@+id/chatNameTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
             android:hint="Chat Name"
+            android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/lastMessageTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Last Message"
-            android:textColor="#868686"/>
+            android:textColor="#868686" />
 
     </LinearLayout>
 
@@ -55,10 +55,12 @@ android:layout_marginBottom="10dp">
         android:id="@+id/timestampTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hh:mm:ss DD/MM/YYYY"
-        android:background="?selectableItemBackgroundBorderless"
         android:layout_gravity="center"
-        android:contentDescription="Chat" />
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="Chat"
+        android:text="hh:mm:ss \nDD/MM/YYYY"
+        android:textDirection="rtl"
+        android:textSize="12sp" />
 
 </LinearLayout>
 
