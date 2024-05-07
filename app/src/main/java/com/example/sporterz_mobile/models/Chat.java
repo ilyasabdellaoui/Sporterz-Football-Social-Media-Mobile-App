@@ -1,21 +1,24 @@
 package com.example.sporterz_mobile.models;
 
-// Chat.java
+import java.util.Map;
+
 public class Chat {
     private String chatId;
     private String name;
     private String lastMessage;
     private String timestamp;
+    private Map<String, Boolean> participants; // Participants of the chat
 
     public Chat() {
         // Default constructor required for Firebase
     }
 
-    public Chat(String chatId, String name, String lastMessage, String timestamp) {
+    public Chat(String chatId, String name, String lastMessage, String timestamp, Map<String, Boolean> participants) {
         this.chatId = chatId;
         this.name = name;
         this.lastMessage = lastMessage;
         this.timestamp = timestamp;
+        this.participants = participants;
     }
 
     public String getChatId() {
@@ -48,5 +51,13 @@ public class Chat {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Map<String, Boolean> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(Map<String, Boolean> participants) {
+        this.participants = participants;
     }
 }

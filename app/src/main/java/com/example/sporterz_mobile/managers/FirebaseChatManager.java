@@ -111,6 +111,7 @@ public class FirebaseChatManager {
                     } else {
                         chat.setLastMessage(null);
                     }
+                    Log.d(TAG, "JJJJJJJJJJJ onDataChange: " + chat.getChatId() + " " + chat.getParticipants() + " " + chat.getLastMessage() + " " + chat.getTimestamp() + " " + LastMessage);
                     chatList.add(chat);
                 }
                 listener.onChatsLoaded(chatList);

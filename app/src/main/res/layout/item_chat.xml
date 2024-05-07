@@ -1,66 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.cardview.widget.CardView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+android:padding="16dp"
+android:background="@color/white"
+app:cardCornerRadius="8dp"
+app:cardElevation="4dp"
+android:layout_marginBottom="10dp">
+
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    android:padding="16dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/chatContainer"
-        android:layout_width="match_parent"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/chatImage"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_anon_user_48dp" />
+
+    <LinearLayout
+        android:id="@+id/item_chat"
+        android:layout_gravity="center"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#fff"
-        android:orientation="horizontal">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/chatImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_anon_user_48dp" />
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/chatNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10sp"
-            android:orientation="vertical">
+            android:textColor="@android:color/black"
+            android:hint="Chat Name"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/chatNameTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chat"
-                android:textColor="#000"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/lastMessageTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="message"
-                android:textColor="#868686"
-                android:textSize="11sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/lastMessageTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="20dp"
-            android:gravity="right">
-
-            <TextView
-                android:id="@+id/timestampTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:text="hh:mm:ss DD/MM/YYYY"
-                android:textSize="10sp" />
-
-        </LinearLayout>
+            android:hint="Last Message"
+            android:textColor="#868686"/>
 
     </LinearLayout>
-</RelativeLayout>
+
+    <TextView
+        android:id="@+id/timestampTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hh:mm:ss DD/MM/YYYY"
+        android:background="?selectableItemBackgroundBorderless"
+        android:layout_gravity="center"
+        android:contentDescription="Chat" />
+
+</LinearLayout>
+
+</androidx.cardview.widget.CardView>

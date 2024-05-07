@@ -2,6 +2,7 @@ package com.example.sporterz_mobile.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.example.sporterz_mobile.R;
 import com.example.sporterz_mobile.adapters.ChatListAdapter;
 import com.example.sporterz_mobile.managers.FirebaseChatManager;
 import com.example.sporterz_mobile.models.Chat;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,6 @@ public class MessagesFragment extends Fragment  implements ChatListAdapter.OnCha
 
     private RecyclerView mRecyclerView;
     private ChatListAdapter mAdapter;
-    private List<Chat> mChatList;
     private FirebaseChatManager mChatManager;
     private ProgressBar mProgressBar;
     private TextView mNoChatsTextView;
@@ -44,7 +45,6 @@ public class MessagesFragment extends Fragment  implements ChatListAdapter.OnCha
 
         mRecyclerView = view.findViewById(R.id.chat_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mChatList = new ArrayList<>();
         mAdapter = new ChatListAdapter(getContext(), this);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -65,11 +65,10 @@ public class MessagesFragment extends Fragment  implements ChatListAdapter.OnCha
                 if (chatList.isEmpty()) {
                     showNoChatsFound(true);
                 } else {
-                    mChatList.clear();
+                    Log.d(TAG, "onChatsLoaded: " + chatList.size() + " chats loaded");
+
                     mAdapter.updateChats(chatList);
-                    mChatList.addAll(chatList);
-                    mAdapter.notifyDataSetChanged();
-                    showNoChatsFound(false);
+                    showNoChatsFound(chatList.isEmpty());
                 }
                 showLoading(false);
             }
@@ -93,8 +92,6 @@ public class MessagesFragment extends Fragment  implements ChatListAdapter.OnCha
 
     @Override
     public void onChatClick(Chat chat) {
-        // Handle the click event here
-        // For example, start the ChatActivity with the clicked chat
         Intent intent = new Intent(getActivity(), MessageActivity.class);
         intent.putExtra("chat_id", chat.getChatId());
         startActivity(intent);

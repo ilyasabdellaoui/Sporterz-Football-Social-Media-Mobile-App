@@ -70,8 +70,11 @@ public class MessageActivity extends AppCompatActivity {
 
         mMessageManager = new FirebaseMessageManager();
 
-        // Hardcoded chat ID for testing
-        mChatId = "test_chat_id";
+        // Retrieve the chat ID from the intent
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            mChatId = extras.getString("chat_id");
+        }
 
         // Initialize mSendButton
         mSendButton = findViewById(R.id.sendButton);
