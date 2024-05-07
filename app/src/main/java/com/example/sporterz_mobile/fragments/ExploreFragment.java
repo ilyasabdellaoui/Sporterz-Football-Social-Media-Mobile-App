@@ -51,6 +51,9 @@ public class ExploreFragment extends Fragment {
 
         usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
+        // Load all users by default
+        loadAllUsers();
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,4 +121,31 @@ public class ExploreFragment extends Fragment {
                     }
                 });
     }
+    private void loadAllUsers() {
+        progressBar.setVisibility(View.VISIBLE);
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    User user = snapshot.getValue(User.class);
+                    if (user != null) {
+                        String userId = snapshot.getKey();
+                        user.setUserId(userId);
+                        userList.add(user);
+                    }
+                }
+                progressBar.setVisibility(View.GONE);
+                userAdapter.notifyDataSetChanged();
+                noUsersFoundText.setVisibility(userList.isEmpty() ? View.VISIBLE : View.GONE);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(getActivity(), "Error loading users: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }
