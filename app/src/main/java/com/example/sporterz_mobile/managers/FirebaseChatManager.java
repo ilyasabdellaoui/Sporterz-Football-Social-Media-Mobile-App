@@ -1,6 +1,9 @@
 package com.example.sporterz_mobile.managers;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
@@ -14,7 +17,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,10 +34,10 @@ public class FirebaseChatManager {
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
-
-    private String LastMessage;
-    private String timeSt;
     private String cFullName;
+    private String LastMessage;
+    private static StorageReference storageReference;
+    private ImageView chatImage;
 
     public FirebaseChatManager() {
         mAuth = FirebaseAuth.getInstance();
@@ -52,6 +59,19 @@ public class FirebaseChatManager {
         }
 
         return latestKey;
+    }
+
+    // Get other user image
+    private void getChatImage(Chat chat) throws IOException {
+        // get the list of participants in the chat, the other user is the one who is not the current user
+        // get the user id of the other user
+        final String userId = chat.getParticipants().keySet().stream().filter(id -> !id.equals(mCurrentUser.getUid())).findFirst().orElse(null);
+        storageReference = FirebaseStorage.getInstance().getReference().child("images/" + userId);
+        File localfile = File.createTempFile("tempImage", "jpeg");
+        storageReference.getFile(localfile).addOnSuccessListener(taskSnapshot -> {
+            Bitmap bitmap = BitmapFactory.decodeFile(localfile.getAbsolutePath());
+            chatImage.setImageBitmap(bitmap);
+        });
     }
 
     // Get current user fullname
