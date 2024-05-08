@@ -15,6 +15,8 @@ public class HomeItem {
     private String thinking;
     private String postDate;
 
+    public HomeItem() { }
+
     public HomeItem(Bitmap imageBitmap, String username, String thinking, String postDate) {
         this.imageBitmap = imageBitmap;
         this.username = username;

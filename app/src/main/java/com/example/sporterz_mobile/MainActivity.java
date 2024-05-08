@@ -17,7 +17,7 @@ import com.example.sporterz_mobile.fragments.ExploreFragment;
 import com.example.sporterz_mobile.fragments.HomeFragment;
 import com.example.sporterz_mobile.fragments.MatchesFragment;
 import com.example.sporterz_mobile.fragments.MessagesFragment;
-import com.example.sporterz_mobile.fragments.NotificationsFragment;
+//import com.example.sporterz_mobile.fragments.NotificationsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.matches:
                     changeFragment(new MatchesFragment());
                     break;
-                case R.id.notifications:
+                /*case R.id.notifications:
                     changeFragment(new NotificationsFragment());
-                    break;
+                    break;*/
                 case R.id.messages:
                     changeFragment(new MessagesFragment());
                     break;

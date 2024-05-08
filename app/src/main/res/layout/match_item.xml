@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/matchcard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp"
+    app:cardUseCompatPadding="true"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/white">
+
+        <!-- Referee and Date -->
+        <TextView
+            android:id="@+id/datetime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+        <!-- Venue Name and City -->
+        <TextView
+            android:id="@+id/venue_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:padding="8dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"/>
+
+        <!-- Teams' Names and Logos -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <!-- Team 1 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/team1_logo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    tools:ignore="ContentDescription"/>
+
+                <TextView
+                    android:id="@+id/team1_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+
+            <!-- Versus -->
+            <TextView
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="25sp"
+                android:text="vs"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+
+            <!-- Team 2 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/team2_logo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="fitCenter"
+                    tools:ignore="ContentDescription"/>
+
+                <TextView
+                    android:id="@+id/team2_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:gravity="center"
+                    android:textColor="@android:color/black"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Scores -->
+        <TextView
+            android:id="@+id/score_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
