@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.sporterz_mobile.databinding.ActivityProfileBinding;
@@ -86,6 +87,32 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
         }
+
+        binding.button.setOnClickListener(view -> {
+            String username = binding.profileUsername.getText().toString();
+            String firstname = binding.profileFirstname.getText().toString();
+            String lastname = binding.profileLastname.getText().toString();
+            String bio = binding.profileBio.getText().toString();
+
+            if (username.isEmpty()) {
+                binding.profileUsername.setError("Username required!");
+            } else if (firstname.isEmpty()) {
+                binding.profileFirstname.setError("Firstname required!");
+            } else if (lastname.isEmpty()) {
+                binding.profileLastname.setError("Lastname required!");
+            } else {
+                User user = new User(firstname, lastname, username, bio);
+                if (!uid.isEmpty()) {
+                    databaseReference.child(uid).setValue(user).addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ProfileActivity.this, "Saved Successfully!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(ProfileActivity.this, "Error : " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
 
 
 

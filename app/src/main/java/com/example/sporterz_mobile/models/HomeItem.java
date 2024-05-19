@@ -10,26 +10,18 @@ import java.util.Date;
 import java.util.Locale;
 
 public class HomeItem {
-    private Bitmap imageBitmap;
     private String username;
     private String thinking;
     private String postDate;
+    private String userID;
 
     public HomeItem() { }
 
-    public HomeItem(Bitmap imageBitmap, String username, String thinking, String postDate) {
-        this.imageBitmap = imageBitmap;
+    public HomeItem(String username, String thinking, String postDate, String userID) {
         this.username = username;
         this.thinking = thinking;
         this.postDate = postDate;
-    }
-
-    public Bitmap getImageBitmap() {
-        return imageBitmap;
-    }
-
-    public void setImageBitmap(Bitmap imageBitmap) {
-        this.imageBitmap = imageBitmap;
+        this.userID = userID;
     }
 
     public String getUsername() {
@@ -54,5 +46,13 @@ public class HomeItem {
 
     public void setPostDate(String postDate) {
         this.postDate = postDate;
+    }
+
+    public String getUserId() {
+        return this.userID;
+    }
+
+    public void setUserId(String userID) {
+        this.userID = userID;
     }
 }

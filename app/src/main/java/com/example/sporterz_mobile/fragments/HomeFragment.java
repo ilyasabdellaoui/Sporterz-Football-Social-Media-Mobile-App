@@ -18,6 +18,7 @@ import com.example.sporterz_mobile.models.HomeItem;
 import com.example.sporterz_mobile.R;
 import com.example.sporterz_mobile.adapters.PostsAdapter;
 import com.example.sporterz_mobile.databinding.FragmentHomeBinding;
+import com.example.sporterz_mobile.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,9 +49,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private PostsAdapter postsAdapter;
     private ArrayList<HomeItem> items;
-    private HomeItem item;
     private String username;
-    private Bitmap imageBitmap;
+    //private Bitmap imageBitmap;
     private StorageReference storageReference;
 
     @Override
@@ -93,12 +93,7 @@ public class HomeFragment extends Fragment {
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
                 Date currentDate = new Date();
                 String formattedDate = dateFormat.format(currentDate);
-                try {
-                    getProfileImage();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                HomeItem homeItem = new HomeItem(imageBitmap, username, thinking, formattedDate);
+                HomeItem homeItem = new HomeItem(username, thinking, formattedDate, uid);
                 String postId = databaseReference.push().getKey();
                 if (!thinking.isEmpty() && !postId.isEmpty()) {
                     databaseReference.child(postId).setValue(homeItem)
@@ -121,35 +116,31 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
+/*
     private void getProfileImage() throws IOException {
-        final String userId = auth.getCurrentUser().getUid().toString();
-        storageReference = FirebaseStorage.getInstance().getReference().child("images/" + userId);
+        storageReference = FirebaseStorage.getInstance().getReference().child("images/" + uid);
         File localfile = File.createTempFile("tempImage", "jpeg");
         storageReference.getFile(localfile).addOnSuccessListener(taskSnapshot -> {
             imageBitmap = BitmapFactory.decodeFile(localfile.getAbsolutePath());
         });
     }
-
+*/
     private void fetchPosts() {
         dbReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 items.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Bitmap postImage = (Bitmap) snapshot.child("imageBitmap").getValue();
-                    String username = String.valueOf(snapshot.child("username").getValue());
-                    String thinking = String.valueOf(snapshot.child("thinking").getValue());
-                    String postDate = String.valueOf(snapshot.child("postDate").getValue());
-                    item = new HomeItem(postImage, username, thinking, postDate);
-                    items.add(item);
+                    HomeItem homeItem = snapshot.getValue(HomeItem.class);
+                    if (homeItem != null) {
+                        items.add(homeItem);
+                    }
                 }
                 postsAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle errors
                 Toast.makeText(getContext(), "Failed to retrieve data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
