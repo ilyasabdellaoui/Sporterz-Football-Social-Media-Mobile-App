@@ -25,7 +25,7 @@
             android:textAlignment="center"
             android:padding="8dp"
             android:textSize="16sp"
-            android:textColor="@android:color/black"/>
+            android:textColor="#265073"/>
 
         <!-- Venue Name and City -->
         <TextView
@@ -35,7 +35,7 @@
             android:textAlignment="center"
             android:padding="8dp"
             android:textSize="16sp"
-            android:textColor="@android:color/black"/>
+            android:textColor="#265073"/>
 
         <!-- Teams' Names and Logos -->
         <LinearLayout
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:gravity="center"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="#265073"/>
             </LinearLayout>
 
             <!-- Versus -->
@@ -76,7 +76,7 @@
                 android:paddingTop="25sp"
                 android:text="vs"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
+                android:textColor="#265073"
                 android:textStyle="bold"
                 android:textSize="30sp" />
 
@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:gravity="center"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="#265073"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -115,7 +115,7 @@
             android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"/>
+            android:textColor="#265073"/>
 
     </LinearLayout>
 
