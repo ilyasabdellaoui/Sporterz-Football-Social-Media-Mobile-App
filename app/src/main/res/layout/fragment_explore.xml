@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:background="#FFF2E1"
+android:background="#F1FADA"
 tools:context=".fragments.ExploreFragment">
 
 <RelativeLayout
@@ -14,20 +14,21 @@ tools:context=".fragments.ExploreFragment">
     android:id="@+id/search_user_layout">
 
     <EditText
+        android:id="@+id/seach_username_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toLeftOf="@id/search_user_btn"
         android:background="@drawable/edit_text_rounded_corner"
-        android:layout_margin="10dp"
+        android:elevation="4dp"
         android:hint="Username"
         android:inputType="textMultiLine"
-        android:textColor="@color/black"
-        android:textColorHighlight="@color/black"
-        android:textColorHint="@color/material_dynamic_tertiary60"
         android:padding="10dp"
-        android:elevation="4dp"
-        android:layout_toLeftOf="@id/search_user_btn"
-        android:id="@+id/seach_username_input"
-        />
+        android:textColor="#265073"
+        android:textColorHint="#265073" />
     <ImageButton
         android:layout_width="40dp"
         android:layout_height="40dp"
@@ -35,7 +36,7 @@ tools:context=".fragments.ExploreFragment">
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:background="?attr/selectableItemBackgroundBorderless"
-        app:tint="#2B2B2B"
+        app:tint="#265073"
         android:padding="4dp"
         android:layout_margin="10dp"
         android:id="@+id/search_user_btn"/>
@@ -62,7 +63,7 @@ tools:context=".fragments.ExploreFragment">
         android:visibility="gone"
         android:indeterminate="true"
         android:indeterminateTintMode="src_atop"
-        android:indeterminateTint="@color/black"/>
+        android:indeterminateTint="#265073"/>
 
     <TextView
         android:id="@+id/no_users_found_text"
@@ -71,7 +72,7 @@ tools:context=".fragments.ExploreFragment">
         android:layout_gravity="center"
         android:text="No Users Found!"
         android:textSize="18sp"
-        android:textColor="@color/black"
+        android:textColor="#265073"
         android:visibility="gone" />
 
 </FrameLayout>

@@ -36,7 +36,7 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
+                android:textColor="#265073"
                 android:textSize="12sp" />
 
             <TextView
