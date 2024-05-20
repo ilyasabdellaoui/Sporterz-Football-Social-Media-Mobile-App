@@ -81,24 +81,6 @@ public class FirebaseChatManager {
             return;
         }
 
-        // Get current user fullname
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
-        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    String firstname = snapshot.child("firstname").getValue(String.class);
-                    String lastname = snapshot.child("lastname").getValue(String.class);
-                    cFullName = firstname + " " + lastname;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Chat List Adapter", "onCancelled: " + error.getMessage());
-            }
-        });
-
         Query chatQuery = mDatabase.child("chats").orderByChild("participants/" + mCurrentUser.getUid()).equalTo(true);
         chatQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -112,17 +94,6 @@ public class FirebaseChatManager {
                     chat.setChatId(chatId);
                     // get the last message in the chat
                     assert chatId != null;
-
-                    // chat name is composed of : current user fullname # other user fullname
-                    // I need to get the current user fullname from string Fullname and change chat name to just other user fullname
-                    String[] parts = chat.getName().split("#");
-                    String part1 = parts[0];
-                    String part2 = parts[1];
-                    if (part1.equals(cFullName)) {
-                        chat.setName(part1);
-                    } else {
-                        chat.setName(part2);
-                    }
 
                     DataSnapshot message = chatSnapshot.child("messages");
 
