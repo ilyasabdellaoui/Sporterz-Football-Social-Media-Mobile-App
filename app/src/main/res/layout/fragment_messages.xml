@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF2E1"
+    android:background="#F1FADA"
     tools:context=".fragments.MessagesFragment">
 
     <RelativeLayout
@@ -20,9 +20,8 @@
             android:layout_margin="10dp"
             android:hint="Search a Chat"
             android:inputType="textMultiLine"
-            android:textColor="@color/black"
-            android:textColorHighlight="@color/black"
-            android:textColorHint="@color/material_dynamic_tertiary60"
+            android:textColor="#265073"
+            android:textColorHint="#265073"
             android:padding="10dp"
             android:elevation="4dp"
             android:layout_toLeftOf="@id/search_chat_btn"
@@ -34,7 +33,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:tint="#2B2B2B"
+            app:tint="#265073"
             android:padding="4dp"
             android:layout_margin="10dp"
             android:id="@+id/search_chat_btn"/>
@@ -61,7 +60,7 @@
             android:visibility="gone"
             android:indeterminate="true"
             android:indeterminateTintMode="src_atop"
-            android:indeterminateTint="@color/black"/>
+            android:indeterminateTint="#265073"/>
 
         <TextView
             android:id="@+id/no_chats_found_text_view"
@@ -70,7 +69,7 @@
             android:layout_gravity="center"
             android:text="No Chats Found!"
             android:textSize="18sp"
-            android:textColor="@color/black"
+            android:textColor="#265073"
             android:visibility="gone" />
 
     </FrameLayout>

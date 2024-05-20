@@ -39,7 +39,7 @@ android:layout_marginBottom="10dp">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Chat Name"
-            android:textColor="@android:color/black"
+            android:textColor="#265073"
             android:textSize="12sp"
             android:textStyle="bold" />
 
