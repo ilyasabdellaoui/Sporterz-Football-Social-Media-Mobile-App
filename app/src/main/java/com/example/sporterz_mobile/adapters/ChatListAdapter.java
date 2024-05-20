@@ -126,11 +126,30 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
             // get the list of participants in the chat, the other user is the one who is not the current user
             // get the user id of the other user
             final String userId = chat.getParticipants().keySet().stream().filter(id -> !id.equals(mCurrentUser.getUid())).findFirst().orElse(null);
+
             storageReference = FirebaseStorage.getInstance().getReference().child("images/" + userId);
             File localfile = File.createTempFile("tempImage", "jpeg");
             storageReference.getFile(localfile).addOnSuccessListener(taskSnapshot -> {
                 Bitmap bitmap = BitmapFactory.decodeFile(localfile.getAbsolutePath());
                 chatImageView.setImageBitmap(bitmap);
+            });
+
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        String firstname = snapshot.child("firstname").getValue(String.class);
+                        String lastname = snapshot.child("lastname").getValue(String.class);
+                        String cFullName = firstname + " " + lastname;
+                        chatNameTextView.setText(cFullName);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("Chat List Adapter", "onCancelled: " + error.getMessage());
+                }
             });
         }
 

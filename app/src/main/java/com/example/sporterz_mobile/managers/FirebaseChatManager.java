@@ -118,7 +118,7 @@ public class FirebaseChatManager {
                     String[] parts = chat.getName().split("#");
                     String part1 = parts[0];
                     String part2 = parts[1];
-                    if (part2.equals(cFullName)) {
+                    if (part1.equals(cFullName)) {
                         chat.setName(part1);
                     } else {
                         chat.setName(part2);
